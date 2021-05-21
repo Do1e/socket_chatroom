@@ -117,11 +117,16 @@ inline int Process(int ID){
 		memset(op, 0, sizeof(op));
 		while(buf[ID][0] != ' ' && buf[ID][0] != 0){
 			op[p] = buf[ID][0]; p++;
-			strcpy(buf[ID], buf[ID]+1);
+			char tmp[MAXLINE + 50];//避免未定义行为
+			strcpy(tmp, buf[ID]+1);
+			strcpy(buf[ID], tmp);
 		}
 		op[p] = 0;
-		while(buf[ID][0] == ' ' && buf[ID][0] != 0)
-			strcpy(buf[ID], buf[ID]+1);
+		while(buf[ID][0] == ' ' && buf[ID][0] != 0){
+			char tmp[MAXLINE + 50];
+			strcpy(tmp, buf[ID]+1);
+			strcpy(buf[ID], tmp);
+		}
 		
 		if(op[1] == 'n'){
 			// 新用户登陆，判断是否重名
